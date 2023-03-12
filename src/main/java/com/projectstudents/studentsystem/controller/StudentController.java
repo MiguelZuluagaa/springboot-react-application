@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/student")
@@ -25,5 +26,14 @@ public class StudentController {
     public List<Student> getAllStudents(){
         return studentService.getAllStudents();
     }
+
+    @DeleteMapping("/delete/{idStudent}")
+    public Boolean deleteStudentById(@PathVariable(value = "idStudent") int idStudent ){
+        if(studentService.findById(idStudent) != null){
+            return studentService.deleteStudentById(idStudent);
+        }
+        return false;
+    }
+
 
 }
